@@ -1,0 +1,46 @@
+cube:
+  name: sales
+
+  description: Sales analytics semantic cube
+
+  measures:
+    revenue:
+      type: sum
+      sql: revenue
+
+    units_sold:
+      type: sum
+      sql: units_sold
+
+    orders:
+      type: count
+      sql: order_id
+
+    profit:
+      type: sum
+      sql: profit
+
+    margin:
+      type: number
+      sql: profit / NULLIF(revenue, 0)
+
+  dimensions:
+    date:
+      type: time
+      sql: date
+
+    region:
+      type: string
+      sql: region
+
+    country:
+      type: string
+      sql: country
+
+    product:
+      type: string
+      sql: product
+
+    product_tier:
+      type: string
+      sql: product_tier
