@@ -14,7 +14,7 @@ cube:
 
     orders:
       type: count
-      sql: order_id
+      sql: event_id
 
     profit:
       type: sum
