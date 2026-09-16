@@ -1,0 +1,22 @@
+cube: ExpensesCube
+description: "Governed semantic definition for enterprise cost centers"
+
+dimensions:
+  - name: quarter
+    type: string
+    description: "Fiscal reporting quarter"
+    
+  - name: region
+    type: string
+    description: "Operating expenditure region"
+
+measures:
+  - name: total_cogs
+    type: sum
+    sql: "cogs"
+    description: "Cost of Goods Sold"
+
+  - name: total_operating_expense
+    type: sum
+    sql: "operating_expense"
+    description: "Operating expenditure overhead"

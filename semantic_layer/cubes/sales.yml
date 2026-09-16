@@ -1,0 +1,26 @@
+cube: SalesCube
+description: "Governed semantic definition for billed sales and transaction metrics"
+
+dimensions:
+  - name: quarter
+    type: string
+    description: "Fiscal reporting quarter (e.g., 2025-Q1)"
+    
+  - name: region
+    type: string
+    description: "Operating sales region"
+    
+  - name: product_line
+    type: string
+    description: "Enterprise product category"
+
+measures:
+  - name: total_revenue
+    type: sum
+    sql: "gross_revenue"
+    description: "Sum of total billed revenue"
+
+  - name: total_units_sold
+    type: sum
+    sql: "units_sold"
+    description: "Sum of units ordered"
