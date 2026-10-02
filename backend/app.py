@@ -48,3 +48,21 @@ def query_metrics(query: SemanticQuery):
         "governed_data": res_df.to_dict(orient="records"),
         "compiled_sql": f"SELECT {', '.join(query.dimensions + query.measures)} FROM EnterpriseFinance GROUP BY {', '.join(query.dimensions)}"
     }
+
+import datetime
+
+AUDIT_LOG_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "query_audit_log.csv")
+
+@app.post("/export-audit-log")
+def export_audit_log(query: SemanticQuery):
+    """Logs every semantic query with a timestamp for governance auditing."""
+    log_entry = {
+        "timestamp": datetime.datetime.now().isoformat(),
+        "dimensions": ",".join(query.dimensions),
+        "measures": ",".join(query.measures),
+        "filters": str(query.filters) if query.filters else ""
+    }
+    file_exists = os.path.exists(AUDIT_LOG_PATH)
+    log_df = pd.DataFrame([log_entry])
+    log_df.to_csv(AUDIT_LOG_PATH, mode="a", header=not file_exists, index=False)
+    return {"status": "logged", "entry": log_entry}
