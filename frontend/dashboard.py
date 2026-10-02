@@ -68,7 +68,7 @@ st.divider()
 # Conversational Interface
 user_query = st.text_input(
     "Enter business query:",
-    value="Why did our European margins drop last quarter?"
+    value="Why did our East margins drop last quarter?"
 )
 
 if st.button("Run Governed Semantic Query"):

@@ -9,11 +9,11 @@ class AgenticSemanticOrchestrator:
 
     def translate_to_semantic_payload(self, prompt: str) -> Dict[str, Any]:
         p = prompt.lower()
-        if "europe" in p and ("margin" in p or "drop" in p or "profit" in p):
+        if "east" in p and ("margin" in p or "drop" in p or "profit" in p):
             return {
                 "dimensions": ["quarter", "region"],
                 "measures": ["total_revenue", "total_cogs", "net_margin", "profit_margin_pct"],
-                "filters": {"region": "Europe"}
+                "filters": {"region": "East"}
             }
         if "unbounded" in p or "all dimensions" in p:
             return {
@@ -65,11 +65,11 @@ class AgenticSemanticOrchestrator:
         # Automated Anomaly Detection & Diagnostic Trigger
         diagnostic_summary = "All regional operational margins remain within certified tolerance."
         for row in data:
-            if row.get("quarter") == "2025-Q4" and row.get("region") == "Europe":
+            if row.get("quarter") == "2025-Q4" and row.get("region") == "East":
                 if row.get("profit_margin_pct", 0) < 25.0:
-                    detail = self.execute_drilldown_diagnostic("2025-Q4", "Europe")
+                    detail = self.execute_drilldown_diagnostic("2025-Q4", "East")
                     diagnostic_summary = (
-                        f"Margin Anomaly Flagged: European net margin dropped to {row['profit_margin_pct']}% in 2025-Q4.\n👉 {detail}"
+                        f"Margin Anomaly Flagged: East net margin dropped to {row['profit_margin_pct']}% in 2025-Q4.\n👉 {detail}"
                     )
 
         return {

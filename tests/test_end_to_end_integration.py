@@ -30,10 +30,10 @@ def test_cost_governor_enforcement():
 def test_agentic_orchestrator_translation():
     """Validates natural language intent routing to structured semantic JSON."""
     orchestrator = AgenticSemanticOrchestrator()
-    payload = orchestrator.translate_to_semantic_payload("Why did our European margins drop last quarter?")
+    payload = orchestrator.translate_to_semantic_payload("Why did our East margins drop last quarter?")
     assert payload["dimensions"] == ["quarter", "region"]
     assert "net_margin" in payload["measures"]
-    assert payload["filters"] == {"region": "Europe"}
+    assert payload["filters"] == {"region": "East"}
 
 def test_semantic_query_execution():
     """Validates that certified queries return deterministic aggregated numbers."""
